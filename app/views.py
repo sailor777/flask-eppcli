@@ -51,6 +51,26 @@ def index():
             flash(resp)
         return redirect(url_for('index'))
 
+    form6 = ContactCreateForm()
+    newcontact = form6.data['newcontact']
+    person = form6.data['person']
+    org = form6.data['org']
+    address = form6.data['address']
+    email = form6.data['email']
+    phone = form6.data['phone']
+    if form6.validate_on_submit():
+        my_epp.connect(EPP_SERVER)
+        resp = my_epp.login(EPP_LOGIN,EPP_PASS)
+        resp = my_epp.contact_create(person,org,address,city,email,phone,newcontact)
+        print(resp)
+        my_epp.logout()
+        if resp['epp']['response']['result'][0]['msg']['_text']\
+            == 'Command completed successfully':
+            flash('Command completed successfully')
+        else:
+            flash("Shit happens :()")
+        return redirect(url_for('index'))
+
     form1 = DomainCheckForm()
     domain = form1.data['domain']
     if form1.validate_on_submit():
@@ -130,6 +150,7 @@ def index():
                            title='UI EPP Domain System',
                            form=form,
                            form3=form3,
+                           form6=form6,
                            form1=form1,
                            form4=form4,
                            form2=form2,

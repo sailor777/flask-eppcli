@@ -38,7 +38,8 @@ class MyEpp(EppClient):
         print(cmd)
         return self.send(cmd, log_send_recv=log_send_recv)
 
-    def contact_create(self,person,org,street,city,pc,cc,phone,email,id=None,log_send_recv=False):
+    def contact_create( self,person,org,street,email,phone,id=None,
+                        city='Lviv',pc='79000',cc='UA',log_send_recv=False):
         cmd = EppCreateContactCommand()
         cmd.postalInfo = {  '@type': 'int', 'name': person,'org': org, 'addr': \
                             {'street': street,'city': city, 'pc': pc, 'cc': cc}}

@@ -20,13 +20,14 @@ class DomainInfoForm(Form):
     domaininfo = StringField('Domain_info', validators=[Length(min=2, max=255)])
 
 class ContactCreateForm(Form):
-    registrant = StringField('Contact ID', validators=[Length(min=3, max=16)])
-    person = StringField('First Last', validators=[Length(min=4, max=25)])
+    newcontact = StringField('Contact_ID', validators=[Length(min=3, max=16)])
+    person = StringField('First_Last', validators=[Length(min=4, max=25)])
     org = StringField('Company', validators=[Length(min=4, max=255)])
     address = StringField('Address', validators=[Length(min=4, max=255)])
     city = StringField('City', validators=[Length(min=4, max=25)])
-    cc = StringField('Counry Code', validators=[Length(min=2, max=2)])
-    email = StringField('Email Address', validators=[Length(min=6, max=240)])
+    pc = StringField('PostalCode', validators=[Length(min=4, max=25)])
+    country_code = StringField('Counry_Code', validators=[Length(min=2, max=2)])
+    email = StringField('Email', validators=[Length(min=6, max=240)])
     phone = StringField('Phone number', validators=[DataRequired()])
 
 class DomainCreateForm(Form):
