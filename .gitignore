@@ -1,2 +1,4 @@
 client.key
 client.pem
+config.py
+__pycache__
