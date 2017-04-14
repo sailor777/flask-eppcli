@@ -61,7 +61,7 @@ def index():
     if form6.validate_on_submit():
         my_epp.connect(EPP_SERVER)
         resp = my_epp.login(EPP_LOGIN,EPP_PASS)
-        resp = my_epp.contact_create(person,org,address,city,email,phone,newcontact)
+        resp = my_epp.contact_create(person,org,address,email,phone,newcontact)
         print(resp)
         my_epp.logout()
         if resp['epp']['response']['result'][0]['msg']['_text']\
