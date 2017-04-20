@@ -1,8 +1,9 @@
 from eppy.client import EppClient
-from eppy.doc import (  EppCheckDomainCommand,EppCheckContactCommand,
-                        EppInfoDomainCommand,EppInfoContactCommand,
-                        EppCreateDomainCommand,EppCreateContactCommand,
-                        EppRenewDomainCommand)
+from eppy.doc import (EppCheckDomainCommand, EppCheckContactCommand,
+                    EppInfoDomainCommand, EppInfoContactCommand,
+                    EppCreateDomainCommand, EppCreateContactCommand,
+                    EppRenewDomainCommand)
+
 
 class MyEpp(EppClient):
 
@@ -41,8 +42,8 @@ class MyEpp(EppClient):
     def contact_create( self,person,org,street,email,phone,id=None,
                         city='Lviv',pc='79000',cc='UA',log_send_recv=False):
         cmd = EppCreateContactCommand()
-        cmd.postalInfo = {  '@type': 'int', 'name': person,'org': org, 'addr': \
-                            {'street': street,'city': city, 'pc': pc, 'cc': cc}}
+        cmd.postalInfo = {'@type': 'int', 'name': person,'org': org, 'addr':
+                        {'street': street,'city': city, 'pc': pc, 'cc': cc}}
         cmd.voice = phone
         cmd.email = email
         cmd.id = id

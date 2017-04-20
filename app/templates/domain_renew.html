@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post" name="domain_renew">
+    {{ form.hidden_tag() }}
+      <table>
+        <td>Renew Domain(*.epp.ua,*.epp2.ua):</td>
+          <tr>
+              <td><span style="width: 100">Domain:</span>
+                {{ form.domain_name(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.domain_name.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">exdate:</span>
+                {{ form.exdate(size=30, maxlength=16) }}</td>
+              <td>
+              {% for error in form.exdate.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">years:</span>
+                {{ form.years(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.years.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+    </table>
+    <td></td>
+    <td><input type="submit" value="Renew"></td>
+    <td></td>
+</form>
+{% endblock %}

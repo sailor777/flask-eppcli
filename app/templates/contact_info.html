@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post" name="contact_info">
+    {{ form.hidden_tag() }}
+      <table>
+        <td>Contact Info:</td>
+          <tr>
+              <td>{{ form.contact_name(size=30, maxlength=140) }}</td>
+              <td>
+              {% for error in form.contact_name.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+    </table>
+    <td></td>
+    <td><input type="submit" value="Info"></td>
+    <td></td>
+</form>
+{% endblock %}

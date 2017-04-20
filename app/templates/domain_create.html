@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post" name="domain_create">
+    {{ form.hidden_tag() }}
+      <table>
+        <td>Create Domain(*.epp.ua,*.epp2.ua):</td>
+          <tr>
+              <td><span style="width: 100">New Domain:</span>
+                {{ form.newdomain(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.newdomain.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">Contact:</span>
+                {{ form.contact(size=30, maxlength=16) }}</td>
+              <td>
+              {% for error in form.contact.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">NServer 1:</span>
+                {{ form.hostobj1(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.hostobj1.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">NServer 2:</span>
+                {{ form.hostobj2(size=30, maxlength=255) }}</td></tr>
+              <td>
+              {% for error in form.hostobj2.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+    </table>
+    <td></td>
+    <td><input type="submit" value="Create"></td>
+    <td></td>
+</form>
+{% endblock %}

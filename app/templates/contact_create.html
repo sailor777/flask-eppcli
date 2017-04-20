@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post" name="contact_create">
+    {{ form.hidden_tag() }}
+      <table>
+        <td>Contact Create:</td>
+          <tr>
+              <td><span style="width: 100">New Contact ID:</span>
+                {{ form.newcontact(size=30, maxlength=16) }}</td>
+              <td>
+              {% for error in form.newcontact.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">Person:</span>
+                {{ form.person(size=30, maxlength=32) }}</td>
+              <td>
+              {% for error in form.person.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">Org:</span>
+                {{ form.org(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.org.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">address:</span>
+                {{ form.address(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.address.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">email:</span>
+                {{ form.email(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.email.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+          <tr>
+              <td><span style="width: 100">phone:</span>
+                {{ form.phone(size=30, maxlength=255) }}</td>
+              <td>
+              {% for error in form.phone.errors %}
+              <span style="color: red;">[{{ error }}]</span><br>
+              {% endfor %}
+              </td>
+          </tr>
+    </table>
+    <td></td>
+    <td><input type="submit" value="Create"></td>
+    <td></td>
+</form>
+{% endblock %}
