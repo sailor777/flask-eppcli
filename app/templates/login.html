@@ -3,16 +3,31 @@
 {% block content %}
   <h1>Sign In</h1>
   <form action="" method="post" name="login">
+    {{ form.csrf_token }}
     {{ form.hidden_tag() }}
-    <div> <span style="width: 100">Username:</span> {{ form.username(size=20) }} </div>
-    {% for error in form.username.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}<br>
-    <div> <span style="width: 100">Password:</span> {{ form.password(size=20) }} </div>
-    {% for error in form.password.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}<br>
-    <p>{{ form.remember_me }} Remember Me</p>
+    <div>
+        {{ form.username(placeholder="username",size=20) }}
+        <span class="error" style="color: red;">
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        </span>
+    </div>
+
+    <div>
+        {{ form.password(placeholder="password",type="password",size=20) }}
+        <span class="error" style="color: red;">
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        </span>
+    </div>
+
+    <p>{{ form.remember_me }} Remember Me </p>
     <input type="submit" value="Sign In">
   </form>
 {% endblock %}

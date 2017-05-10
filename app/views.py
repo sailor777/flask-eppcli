@@ -18,31 +18,42 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 @app.route('/login', methods=['GET','POST'])
 def login():
+    error = None
+    '''if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))'''
     form = LoginForm()
-    user = User.query.filter_by(username=form.data['username']).first()
 
     if form.validate_on_submit():
+        user = User.query.filter_by(username=form.data['username']).first()
         session['remember_me'] = form.remember_me.data
-        if (form.data['username'] == user.username
+        if (user is not None and form.data['username'] == user.username
             and md5(form.data['password'].encode('utf-8')).hexdigest()
             == user.password):
-            flash('Login="{}",remember_me={}'.
-            format(form.username.data,str(form.remember_me.data)))
+            #flash('Login="{}",remember_me={}'.
+            #format(form.username.data,str(form.remember_me.data)))
+            login_user(user)
             return redirect(url_for('index'))
         else:
             flash('Wrong username or password')
+            #error = 'Wrong username or password'
             return redirect(url_for('login'))
 
     return render_template('login.html',
                             title='Sign In',
-                            form=form)
+                            form=form,)
+                            #error=error)
 
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/index', methods=['GET','POST'])
-#@login_required
+@login_required
 def index():
     form = ContactCheckForm()
     registrant = form.data['registrant']
@@ -81,6 +92,7 @@ def index():
         else:
             flash("Shit happens :)")
         return redirect(url_for('index'))
+
     return render_template('index.html',
                            title='UI EPP Domain System',
                            form=form,
@@ -88,7 +100,7 @@ def index():
 
 
 @app.route('/contact/contact_info', methods=['GET','POST'])
-#@login_required
+@login_required
 def contact_info():
     form = ContactInfoForm()
     contact_name = form.data['contact_name']
@@ -110,7 +122,7 @@ def contact_info():
 
 
 @app.route('/contact/contact_create', methods=['GET','POST'])
-#@login_required
+@login_required
 def contact_create():
     form = ContactCreateForm()
     newcontact = form.data['newcontact']
@@ -137,7 +149,7 @@ def contact_create():
 
 
 @app.route('/domain/domain_info', methods=['GET','POST'])
-#@login_required
+@login_required
 def domain_info():
     form = DomainInfoForm()
     domain_name = form.data['domain_name']
@@ -159,7 +171,7 @@ def domain_info():
 
 
 @app.route('/domain/domain_create', methods=['GET','POST'])
-#@login_required
+@login_required
 def domain_create():
     form = DomainCreateForm()
     newdomain = form.data['newdomain']
@@ -186,7 +198,7 @@ def domain_create():
 
 
 @app.route('/domain/domain_renew', methods=['GET','POST'])
-#@login_required
+@login_required
 def domain_renew():
     form = DomainRenewForm()
     domain_name = form.data['domain_name']
@@ -213,6 +225,7 @@ def domain_renew():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))

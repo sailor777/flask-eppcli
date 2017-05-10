@@ -10,11 +10,13 @@ class LoginForm(FlaskForm):
 
 
 class ContactCheckForm(FlaskForm):
-    registrant = StringField('Contact_Check', validators=[Length(min=3, max=16)])
+    registrant = StringField(
+        'Contact_Check', validators=[Length(min=3, max=16)])
 
 
 class ContactInfoForm(FlaskForm):
-    contact_name = StringField('Contact_Info', validators=[Length(min=3, max=16)])
+    contact_name = StringField(
+        'Contact_Info', validators=[Length(min=3, max=16)])
 
 
 class DomainCheckForm(FlaskForm):
@@ -22,7 +24,8 @@ class DomainCheckForm(FlaskForm):
 
 
 class DomainInfoForm(FlaskForm):
-    domain_name = StringField('Domain_info', validators=[Length(min=2, max=255)])
+    domain_name = StringField(
+        'Domain_info', validators=[Length(min=2, max=255)])
 
 
 class ContactCreateForm(FlaskForm):
@@ -45,6 +48,7 @@ class DomainCreateForm(FlaskForm):
 
 
 class DomainRenewForm(FlaskForm):
-    domain_name = StringField('Domain_Name', validators=[Length(min=2, max=255)])
+    domain_name = StringField(
+        'Domain_Name', validators=[Length(min=2, max=255)])
     exdate = StringField('exDate', validators=[Length(min=10, max=10)])
     years = StringField('Years', validators=[Length(min=1, max=2)])
