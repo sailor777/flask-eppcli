@@ -51,7 +51,8 @@ class Contact(db.Model):
     phone = db.Column(db.String(17), nullable=False)
     crDate = db.Column(db.DateTime)
     status = db.Column(db.String(255), nullable=False)
-    user = db.relationship('User', backref='registrant', uselist=False, lazy=True)
+    user = db.relationship('User', backref='registrant',
+                            uselist=False, lazy=True)
     domain = db.relationship('Domain', backref='registrant', lazy=True)
 
 
